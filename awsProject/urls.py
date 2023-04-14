@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import path
+import awsApp.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', app.views.index, name='index'),
+    path('', awsApp.views.index, name='index'),
 ]
