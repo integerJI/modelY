@@ -1,4 +1,4 @@
-<form action="#" method="GET">
-    시트 경로 : <input type="text"><br>
+<form action="{% url 'download' %}" method="GET">
+    시트 경로 : <input type="text" name="sheetPath" value="https://docs.google.com/spreadsheets/d/1gzp2GGUq6m82mCNjF-zIQiJLj0vj0SjY_NWPvNofsNc/edit#gid=759305911"><br>
     <button type="submit">Download</button>
 </form>

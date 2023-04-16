@@ -5,4 +5,5 @@ import awsApp.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', awsApp.views.index, name='index'),
+    path('download/', awsApp.views.download, name='download'),
 ]
