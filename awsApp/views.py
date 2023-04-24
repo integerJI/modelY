@@ -38,13 +38,16 @@ def download(request):
     company_code = worksheet.col_values(5)
     order_number = worksheet.col_values(14)
     brand_name = worksheet.col_values(17)
-    product_name = worksheet.col_values(18)
-    ea_name = worksheet.col_values(19)
-    color_name = worksheet.col_values(20)
-    size_name = worksheet.col_values(21)
-    retail_price = worksheet.col_values(31)
-    supply_price = worksheet.col_values(32)
-    sale_rate = worksheet.col_values(39)
+
+    product_name1 = worksheet.col_values(18)
+    product_name2 = worksheet.col_values(19)
+
+    ea_name = worksheet.col_values(20)
+    color_name = worksheet.col_values(21)
+    size_name = worksheet.col_values(22)
+    retail_price = worksheet.col_values(32)
+    supply_price = worksheet.col_values(33)
+    sale_rate = worksheet.col_values(40)
 
     num_cells = len(company_code)
 
@@ -68,7 +71,8 @@ def download(request):
     company_code_2d = [[col] for col in company_code]
     order_number_2d = [[col] for col in order_number]
     brand_name_2d = [[col] for col in brand_name]
-    product_name_2d = [[col] for col in product_name]
+    product_name1_2d = [[col] for col in product_name1]
+    product_name2_2d = [[col] for col in product_name2]
     ea_name_2d = [[col] for col in ea_name]
     color_name_2d = [[col] for col in color_name]
     size_name_2d = [[col] for col in size_name]
@@ -82,7 +86,7 @@ def download(request):
     worksheet = workbook.active
 
     # 첫 번째 행에 값 넣기
-    worksheet.append(['주문일', '출고일', '코드번호', '주문번호', '브랜드', '품명', '수량', '컬러', '사이즈', '소매가', '공급률', '공급가', '주문액', '세일', '택배', '송장번호', '비고'])
+    worksheet.append(['주문일', '출고일', '코드번호', '주문번호', '브랜드', '상품명1', '상품명2', '수량', '컬러', '사이즈', '소매가', '공급률', '공급가', '주문액', '세일', '택배', '송장번호', '비고'])
 
     # 스타일 지정
     font = Font(color='FFFFFF')
@@ -99,9 +103,10 @@ def download(request):
     worksheet.column_dimensions[get_column_letter(1)].width = 15
     worksheet.column_dimensions[get_column_letter(2)].width = 15
     worksheet.column_dimensions[get_column_letter(3)].width = 20
-    worksheet.column_dimensions[get_column_letter(4)].width = 15
-    worksheet.column_dimensions[get_column_letter(5)].width = 20
-    worksheet.column_dimensions[get_column_letter(6)].width = 30
+    worksheet.column_dimensions[get_column_letter(4)].width = 20
+    worksheet.column_dimensions[get_column_letter(5)].width = 15
+    worksheet.column_dimensions[get_column_letter(6)].width = 20
+    worksheet.column_dimensions[get_column_letter(7)].width = 30
     worksheet.column_dimensions[get_column_letter(8)].width = 10
 
     # 첫 번째 행(리스트) 삭제
@@ -110,7 +115,8 @@ def download(request):
     del company_code_2d[0]
     del order_number_2d[0]
     del brand_name_2d[0]
-    del product_name_2d[0]
+    del product_name1_2d[0]
+    del product_name2_2d[0]
     del ea_name_2d[0]
     del color_name_2d[0]
     del size_name_2d[0]
@@ -124,13 +130,14 @@ def download(request):
         worksheet.cell(row=i+2, column=3, value=company_code_2d[i][0])
         worksheet.cell(row=i+2, column=4, value=order_number_2d[i][0])
         worksheet.cell(row=i+2, column=5, value=brand_name_2d[i][0])
-        worksheet.cell(row=i+2, column=6, value=product_name_2d[i][0])
-        worksheet.cell(row=i+2, column=7, value=ea_name_2d[i][0])
-        worksheet.cell(row=i+2, column=8, value=color_name_2d[i][0])
-        worksheet.cell(row=i+2, column=9, value=size_name_2d[i][0])
-        worksheet.cell(row=i+2, column=10, value=retail_price_2d[i][0])
-        worksheet.cell(row=i+2, column=12, value=supply_price_2d[i][0])
-        worksheet.cell(row=i+2, column=14, value=sale_rate_2d[i][0])
+        worksheet.cell(row=i+2, column=6, value=product_name1_2d[i][0])
+        worksheet.cell(row=i+2, column=7, value=product_name2_2d[i][0])
+        worksheet.cell(row=i+2, column=8, value=ea_name_2d[i][0])
+        worksheet.cell(row=i+2, column=9, value=color_name_2d[i][0])
+        worksheet.cell(row=i+2, column=10, value=size_name_2d[i][0])
+        worksheet.cell(row=i+2, column=11, value=retail_price_2d[i][0])
+        worksheet.cell(row=i+2, column=13, value=supply_price_2d[i][0])
+        worksheet.cell(row=i+2, column=15, value=sale_rate_2d[i][0])
     workbook.save(output)
 
     # response 생성
